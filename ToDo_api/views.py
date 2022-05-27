@@ -19,6 +19,21 @@ class UserTaskForTodayAPIView(APIView):
         )
         return Response(serializer.data)
 
+    # def put(self, request: Request):
+    #     request_data_serializer = serializers.TaskSerializer(data=request.data)
+    #
+    #     if not request_data_serializer.is_valid():
+    #         return Response(
+    #             request_data_serializer.errors,
+    #             status=status.HTTP_400_BAD_REQUEST
+    #         )
+    #
+    #     request_data_serializer.save(authors__username=request.user) #????
+    #     return Response(
+    #         request_data_serializer.data,
+    #         status=status.HTTP_201_CREATED
+    #     )
+
 
 class PublicTaskListAPIView(APIView):
     """Класс позволяющий зарегестрированным пользователям получить доступ к публичным задачам других пользователей
