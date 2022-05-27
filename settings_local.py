@@ -1,1 +1,0 @@
-VERSION_SERVER = "0.0.1"
