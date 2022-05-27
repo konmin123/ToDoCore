@@ -35,19 +35,19 @@ class UserTaskForTodayAPIView(APIView):
     #     )
 
 
-class PublicTaskListAPIView(APIView):
-    """Класс позволяющий зарегестрированным пользователям получить доступ к публичным задачам других пользователей
-    и комментировать их"""
-    def get(self, request: Request):
-        objects = Task.objects.filter(public=True)
-        serializer = serializers.TaskSerializer(
-            instance=objects,
-            many=True,
-        )
-        return Response(serializer.data)
+# class PublicTaskListAPIView(APIView):
+#     """Класс позволяющий зарегестрированным пользователям получить доступ к публичным задачам других пользователей
+#     и комментировать их"""
+#     def get(self, request: Request):
+#         objects = Task.objects.filter(public=True)
+#         serializer = serializers.TaskSerializer(
+#             instance=objects,
+#             many=True,
+#         )
+#         return Response(serializer.data)
 
 
-class PublicNoteListAPIView(ListAPIView):
+class PublicTaskListAPIView(ListAPIView):
     queryset = Task.objects.all()
     serializer_class = serializers.TaskDetailSerializer
 
@@ -68,5 +68,4 @@ class PublicNoteListAPIView(ListAPIView):
         return queryset \
             .filter(public=True) \
             .order_by("-create_at")\
-            .select_related("author")\
-            .prefetch_related("comment_set")
+            .prefetch_related("authors", "comment_set")\
