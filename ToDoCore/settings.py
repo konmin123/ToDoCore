@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'ToDo_api.apps.TodoApiConfig',
 
     'rest_framework',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -131,41 +130,41 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'filters': {
-#         'require_debug_true': {
-#             '()': 'django.utils.log.RequireDebugTrue',
-#         }
-#      },
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.StreamHandler',
-#         }
-#     },
-#     'loggers': {
-#         'django.db.backends': {
-#             'level': 'DEBUG',
-#             'handlers': ['console'],
-#         }
-#     }
-# }
-#
-# TOOLBAR_DEBUG = int(os.environ.get("TOOLBAR_DEBUG", default=0))
-#
-# if TOOLBAR_DEBUG:
-#     try:
-#         from . import local_settings
-#
-#         INSTALLED_APPS += local_settings.INSTALLED_APPS
-#         MIDDLEWARE = local_settings.MIDDLEWARE + MIDDLEWARE
-#
-#         INTERNAL_IPS = local_settings.INTERNAL_IPS
-#     except ImportError as e:
-#         import logging
-#
-#         logger = logging.getLogger(__name__)
-#         logger.warning(f"Ошибка импорта. {e}")
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+     },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    }
+}
+
+TOOLBAR_DEBUG = int(os.environ.get("TOOLBAR_DEBUG", default=0))
+
+if TOOLBAR_DEBUG:
+    try:
+        from . import local_settings
+
+        INSTALLED_APPS += local_settings.INSTALLED_APPS
+        MIDDLEWARE = local_settings.MIDDLEWARE + MIDDLEWARE
+
+        INTERNAL_IPS = local_settings.INTERNAL_IPS
+    except ImportError as e:
+        import logging
+
+        logger = logging.getLogger(__name__)
+        logger.warning(f"Ошибка импорта. {e}")
