@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'ToDo_models.apps.TodoModelConfig',
     'ToDo_api.apps.TodoApiConfig',
 
-    'rest_framework'
+    'rest_framework',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
