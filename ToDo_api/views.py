@@ -38,4 +38,10 @@ class UserTaskForTodayAPIView(APIView):
 class PublicTaskListAPIView(APIView):
     """Класс позволяющий зарегестрированным пользователям получить доступ к публичным задачам других пользователей
     и комментировать их"""
-    ...
+    def get(self, request: Request):
+        objects = Task.objects.filter(public=True)
+        serializer = serializers.TaskSerializer(
+            instance=objects,
+            many=True,
+        )
+        return Response(serializer.data)
