@@ -9,8 +9,8 @@ from ToDo_models.models import Task
 from . import serializers
 
 
-class UserTaskForToday(APIView):
-
+class UserTaskForTodayAPIView(APIView):
+    """"Класс позволяющий получать свои задачи на сегодня/менять их"""
     def get(self, request: Request):
         objects = Task.objects.filter(authors__username=request.user)
         serializer = serializers.TaskSerializer(
@@ -18,3 +18,9 @@ class UserTaskForToday(APIView):
             many=True,
         )
         return Response(serializer.data)
+
+
+class PublicTaskListAPIView(APIView):
+    """Класс позволяющий зарегестрированным пользователям получить доступ к публичным задачам других пользователей
+    и комментировать их"""
+    ...
