@@ -39,7 +39,7 @@ class Task(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
     comment = models.TextField(default='', verbose_name='Текст')
 
     def __str__(self):

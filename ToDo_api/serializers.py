@@ -32,11 +32,11 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         read_only=True,  # поле для чтения
         many=True
     )
-    comment_set = CommentSerializer(many=True, read_only=True)  # one-to-many-relationships
+    comments = CommentSerializer(many=True, read_only=True)  # one-to-many-relationships
 
     class Meta:
         model = Task
         fields = (
-            'id', 'title', 'text', 'execution_time', 'status', 'public',  # из модели
-            'authors', 'comment_set',  # из сериализатора
+            'id', 'title', 'text', 'execution_time', "important", 'status', 'public',  # из модели
+            'authors', 'comments',  # из сериализатора
         )

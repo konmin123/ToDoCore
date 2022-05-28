@@ -5,17 +5,17 @@ from ToDo_models.models import Task
 from . import serializers
 
 
-class MyTasksListTodayAPIView(ListAPIView):
-    queryset = Task.objects.all()
-    serializer_class = serializers.TaskDetailSerializer
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-
-        return queryset \
-            .filter(public=True) \
-            .order_by("important", "-create_at") \
-            .prefetch_related("authors", "comment_set")
+# class MyTasksListTodayAPIView(ListAPIView):
+#     queryset = Task.objects.all()
+#     serializer_class = serializers.TaskDetailSerializer
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#
+#         return queryset \
+#             .filter(public=True) \
+#             .order_by("important", "-create_at") \
+#             .prefetch_related("authors", "comments")
 
 
 class PublicTaskListAPIView(ListAPIView):
@@ -28,7 +28,7 @@ class PublicTaskListAPIView(ListAPIView):
         return queryset \
             .filter(public=True) \
             .order_by("-important", "execution_time") \
-            .prefetch_related("authors", "comment_set")
+            .prefetch_related("authors", "comments")
 
 
 class UserTaskAPIView(RetrieveUpdateDestroyAPIView):
