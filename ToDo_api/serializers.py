@@ -14,9 +14,15 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
 
+    author = serializers.SlugRelatedField(
+        slug_field="username",  # указываем новое поле для отображения
+        read_only=True,  # поле для чтения
+        many=False
+        )
+
     class Meta:
         model = Comment
-        fields = "__all__"
+        fields = ("author", "comment")
 
 
 class TaskDetailSerializer(serializers.ModelSerializer):
@@ -31,6 +37,6 @@ class TaskDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = (
-            'title', 'text', 'execution_time', 'status', 'public',  # из модели
+            'id', 'title', 'text', 'execution_time', 'status', 'public',  # из модели
             'authors', 'comment_set',  # из сериализатора
         )
