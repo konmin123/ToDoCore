@@ -27,7 +27,7 @@ class PublicTaskListAPIView(ListAPIView):
 
         return queryset \
             .filter(public=True) \
-            .order_by("important", "-create_at") \
+            .order_by("-important", "execution_time") \
             .prefetch_related("authors", "comment_set")
 
 

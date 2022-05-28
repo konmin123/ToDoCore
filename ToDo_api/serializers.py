@@ -31,6 +31,6 @@ class TaskDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = (
-            'title', 'text', 'create_at', 'update_at',  # из модели
+            'title', 'text', 'execution_time', 'status', 'public',  # из модели
             'authors', 'comment_set',  # из сериализатора
         )
