@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from rest_framework import serializers
 
 from ToDo_models.models import Task, Comment

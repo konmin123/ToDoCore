@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from django.views.generic import TemplateView
 from ToDoCore import local_settings
 
@@ -17,18 +16,6 @@ class AboutTemplateAPIView(TemplateView):
 
         return context
 
-# class MyTasksListTodayAPIView(ListAPIView):
-#     queryset = Task.objects.all()
-#     serializer_class = serializers.TaskDetailSerializer
-#
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#
-#         return queryset \
-#             .filter(public=True) \
-#             .order_by("important", "-create_at") \
-#             .prefetch_related("authors", "comments")
-
 
 class PublicTaskListAPIView(ListAPIView):
     queryset = Task.objects.all()
@@ -43,6 +30,11 @@ class PublicTaskListAPIView(ListAPIView):
             .prefetch_related("authors", "comments")
 
 
-class UserTaskAPIView(RetrieveUpdateDestroyAPIView):
+class TaskAPIView(CreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = serializers.TaskDetailSerializer
+
+
+class TaskUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
