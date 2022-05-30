@@ -1,6 +1,7 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
 from django.views.generic import TemplateView
 from ToDoCore import local_settings
+from . import filters
 
 
 from ToDo_models.models import Task
@@ -37,4 +38,12 @@ class TaskAPIView(CreateAPIView):
 
 class TaskUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
-    serializer_class = serializers.TaskSerializer
+    serializer_class = serializers.TaskPersonalSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+
+    def filter_queryset(self, queryset):
+        queryset = filters.author_id_filter(queryset, author_id=self.request.user.id)
+        return queryset

@@ -1,7 +1,8 @@
 from django.db.models.query import QuerySet
 
-def author_id_filter(self, queryset: QuerySet):
-    ...
+
+def author_id_filter(queryset: QuerySet, author_id):
+    return queryset.filter(authors=author_id)
 
 
 def author__username_filter(self, queryset):
