@@ -5,26 +5,19 @@ def author_id_filter(queryset: QuerySet, author_id):
     return queryset.filter(authors=author_id)
 
 
-def author__username_filter(self, queryset):
-    # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#iexact
-    ...
+def important_filter(queryset):
+    return queryset.filter(important=True)
 
 
-def comment__rating_filter(self, queryset):
-    # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#exact
-    ...
+def public_filter(self, queryset):
+    return queryset.filter(public=True)
 
 
-def comment__rating__gt_filter(self, queryset):
-    # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#gt
-    ...
+def activity_filter(queryset):
+    return queryset.filter(status=1)
 
 
-def note_create_at__year_filter(self, queryset):
-    # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#year
-    ...
+def completed_task_filter(self, queryset):
+    return queryset.filter(status=3)
 
 
-def note_update_at__month__gte_filter(self, queryset):
-    # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#month
-    ...
