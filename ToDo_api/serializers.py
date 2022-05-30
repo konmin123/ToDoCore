@@ -38,3 +38,11 @@ class TaskDetailSerializer(serializers.ModelSerializer):
             'id', 'title', 'text', 'execution_time', "important", 'status', 'public',  # из модели
             'authors', 'comments',  # из сериализатора
         )
+
+
+class TaskCreateSerializer(serializers.ModelSerializer):
+    """ Одна статья блога """
+
+    class Meta:
+        model = Task
+        fields = "__all__"

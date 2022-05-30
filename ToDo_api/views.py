@@ -32,7 +32,7 @@ class PublicTaskListAPIView(ListAPIView):
 
 class TaskAPIView(CreateAPIView):
     queryset = Task.objects.all()
-    serializer_class = serializers.TaskDetailSerializer
+    serializer_class = serializers.TaskCreateSerializer
 
 
 class TaskUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
