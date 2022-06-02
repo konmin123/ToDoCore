@@ -4,6 +4,8 @@ from ToDo_models.models import Task, Comment
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    authors = serializers.CurrentUserDefault()
+
     class Meta:
         model = Task
         fields = "__all__"
@@ -40,16 +42,5 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         )
 
 
-class TaskCreateSerializer(serializers.ModelSerializer):
-    """ Одна статья блога """
-
-    class Meta:
-        model = Task
-        fields = "__all__"
-
-
-class TaskPersonalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = "__all__"
-        read_only_fields = ("authors",)
+class QueryParamsFilterSerializer(serializers.Serializer):
+    status = serializers.ListField(child=serializers.ChoiceField(choices=Task.Status.choices), required=False)
