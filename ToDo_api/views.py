@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -33,6 +34,8 @@ class UserTaskUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 class UserTasksListAPIView(generics.ListAPIView):
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_class = filters.TaskFilter
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
@@ -64,6 +67,8 @@ class PublicTaskListAPIView(generics.ListAPIView):
     """Выводит публичные записи всех пользователей с комментариями"""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskDetailSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.TaskFilter
 
     def get_queryset(self):
         queryset = super().get_queryset()

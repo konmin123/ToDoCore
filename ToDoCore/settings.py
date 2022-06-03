@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ToDo_models.apps.TodoModelConfig',
     'ToDo_api.apps.TodoApiConfig',
 
+    'django_filters',
     'rest_framework',
 ]
 
