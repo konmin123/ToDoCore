@@ -9,6 +9,7 @@ from ToDo_api import serializers, filters
 
 
 class UserTaskCreateAPIView(generics.CreateAPIView):
+    """"Создание новых задач. Только для авторизованных пользователей."""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
     permission_classes = [IsAuthenticated]
@@ -18,6 +19,7 @@ class UserTaskCreateAPIView(generics.CreateAPIView):
 
 
 class UserTaskUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """Изменение, удаление задач. Только для авторизованных пользователей."""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
     permission_classes = [IsAuthenticated]
@@ -32,6 +34,7 @@ class UserTaskUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserTasksListAPIView(generics.ListAPIView):
+    """"Получение списка задач пользователя. Можно использовать фильтры(статус, важность, публичность)"""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
     # filter_backends = [DjangoFilterBackend]
@@ -64,7 +67,7 @@ class UserTasksListAPIView(generics.ListAPIView):
 
 
 class PublicTaskListAPIView(generics.ListAPIView):
-    """Выводит публичные записи всех пользователей с комментариями"""
+    """Выводит публичные записи всех пользователей с комментариями, сортировка, доп. фильтр"""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskDetailSerializer
     filter_backends = [DjangoFilterBackend]
@@ -80,6 +83,7 @@ class PublicTaskListAPIView(generics.ListAPIView):
 
 
 class AboutTemplateAPIView(TemplateView):
+    """"Выводит статическую страницу, с данными об авторизованном пользователе и текущей версией приложения."""
     template_name = "ToDo_api_templates/about.html"
 
     def get_context_data(self, **kwargs):
