@@ -29,12 +29,16 @@ class UserTaskUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
         return queryset
 
     def filter_queryset(self, queryset):
-        queryset = filters.author_id_filter(queryset, author_id=self.request.user.id)
+        queryset = filters.author_id_filter(
+            queryset,
+            author_id=self.request.user.id,
+        )
         return queryset
 
 
 class UserTasksListAPIView(generics.ListAPIView):
-    """"Получение списка задач пользователя. Можно использовать фильтры(статус, важность, публичность)"""
+    """"Получение списка задач пользователя.
+    Можно использовать фильтры(статус, важность, публичность)"""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
     # filter_backends = [DjangoFilterBackend]
