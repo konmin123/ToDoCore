@@ -50,10 +50,15 @@ class UserTasksListAPIView(generics.ListAPIView):
         return queryset
 
     def filter_queryset(self, queryset):
-        query_params = serializers.QueryParamsFilterSerializer(data=self.request.query_params)
+        query_params = serializers.QueryParamsFilterSerializer(
+            data=self.request.query_params
+        )
         query_params.is_valid(raise_exception=True)
 
-        queryset = filters.author_id_filter(queryset, author_id=self.request.user.id)
+        queryset = filters.author_id_filter(
+            queryset,
+            author_id=self.request.user.id
+        )
 
         status = query_params.data.get("status")
         if status:
@@ -71,7 +76,8 @@ class UserTasksListAPIView(generics.ListAPIView):
 
 
 class PublicTaskListAPIView(generics.ListAPIView):
-    """Выводит публичные записи всех пользователей с комментариями, сортировка, доп. фильтр"""
+    """Выводит публичные записи всех пользователей с комментариями, сортировка,
+    доп. фильтр"""
     queryset = Task.objects.all()
     serializer_class = serializers.TaskDetailSerializer
     filter_backends = [DjangoFilterBackend]
@@ -87,7 +93,8 @@ class PublicTaskListAPIView(generics.ListAPIView):
 
 
 class AboutTemplateAPIView(TemplateView):
-    """"Выводит статическую страницу, с данными об авторизованном пользователе и текущей версией приложения."""
+    """"Выводит статическую страницу, с данными об авторизованном пользователе
+    и текущей версией приложения."""
     template_name = "ToDo_api_templates/about.html"
 
     def get_context_data(self, **kwargs):

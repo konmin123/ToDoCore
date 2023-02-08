@@ -32,15 +32,19 @@ class TaskDetailSerializer(serializers.ModelSerializer):
         read_only=True,  # поле для чтения
         many=True
     )
-    comments = CommentSerializer(many=True, read_only=True)  # one-to-many-relationships
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
         fields = (
-            'id', 'title', 'text', 'execution_time', "important", 'status', 'public',  # из модели
+            'id', 'title', 'text', 'execution_time',
+            "important", 'status', 'public',  # из модели
             'authors', 'comments',  # из сериализатора
         )
 
 
 class QueryParamsFilterSerializer(serializers.Serializer):
-    status = serializers.ListField(child=serializers.ChoiceField(choices=Task.Status.choices), required=False)
+    status = serializers.ListField(
+        child=serializers.ChoiceField(choices=Task.Status.choices),
+        required=False
+    )
