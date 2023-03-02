@@ -37,4 +37,6 @@ urlpatterns = [
     path('', include("ToDo_api.urls")),
     path('docs/', schema_view.with_ui("swagger")),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('api-auth', include('rest_framework.urls')),
+    path('auth/', include('djoser.urls')),
 ]

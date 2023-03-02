@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     'rest_framework',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,19 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+DJOSER = {
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': False,  # Реализовать сервер отправки писем.
+}
+
 
 WSGI_APPLICATION = 'ToDoCore.wsgi.application'
 
